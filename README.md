@@ -9,7 +9,13 @@
 ## Observed behaviours
 
 * CPU runs at max out of the box, essentially.
+    * Issue likely due to "ootb optimisation" setting up the NVMe in a VM. playing with power packages seems to have "jigged" system76-power into working. Call it "software percussive maintenance"
+    * Temps are surprisingly nice, powerscaling goes as low as 400mhz
 * With 5.15, out of the box sensors are fine
 * Screen backlight works as designed!
-* No sound! The Renoir/Césanne sound out isn't recognized!
+* Keyboard shortcuts are fine
+* Touchegg works OOTB!
+* ~~No sound! The Renoir/Césanne sound out isn't recognized!~~
+    * My dumb person and Pipewire. This was caused by missing parts in my Pipewire forced-activation setup missing a few packages for the pulseaudio fake-out to work. Once that was done, just worked!
 * Trackpad is fine
+* OpenRGB has no idea about anything here.
