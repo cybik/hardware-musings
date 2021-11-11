@@ -8,7 +8,9 @@ This is my personal notes about bringing up Linux on an Eluktronics Prometheus X
 * [Observed Nits](#observed-nits)
 * [Things I want to do](#things-i-want-to-do)
    * [Getting LEDs working](#getting-leds-working)
+* [Things I criticize](#things-i-criticize)
 * [Misc](#misc)
+   * [General Info](#general-info)
    * [Hardware Info](#hardware-info)
 
 ## Prep work
@@ -61,7 +63,18 @@ This is my personal notes about bringing up Linux on an Eluktronics Prometheus X
       ```
 * Barring that, give up, install dumb windows in a VM, device-assign the SMBus i2cs into the VM and see if the driver signaling can be intercepted?
 
+## Things I criticize
+
+* Honestly just the UEFIBIOS configuration being barren. The Prometheus XVII's instruction manual shows more menus and options, the XVI looks really oversimplified in comparison. Maybe that's a choice? I dunno.
+
 ## Misc
+
+### General Info
+
+At time of writing, I'm installing Pop! on this computer, specifically the 21.10 version. Other specific details:
+* Custom partition schema with a boot partition separate from /
+  * This is to work around casefold format issues - Grub, rEFInd and gummiboot can't/won't access a casefold ext4 partition yet.
+* Manually did /recovery but configured it at install in the partition setup, and it actually set the recovery partition up. Imagine my surprise.
 
 ### Hardware Info
 
