@@ -17,5 +17,7 @@
 * Touchegg works OOTB!
 * ~~No sound! The Renoir/Césanne sound out isn't recognized!~~
     * My dumb person and Pipewire. This was caused by missing parts in my Pipewire forced-activation setup missing a few packages for the pulseaudio fake-out to work. Once that was done, just worked!
+    * Further proof of this: a full "reinstall" (made to optimize partition setup and data arrangement, because I'm dumb) had sound working before shenanigans with audio
+    * Further further proof of this: with additional package pulls in my "bootstrap script", Pipewire worked fine
 * Trackpad is fine
 * OpenRGB has no idea about anything here.
