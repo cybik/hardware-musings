@@ -31,3 +31,4 @@
       i2c-1   smbus           SMBus PIIX4 adapter port 0 at ff00      SMBus adapter
       i2c-2   smbus           SMBus PIIX4 adapter port 2 at ff00      SMBus adapter
       ```
+* Barring that, give up, install dumb windows in a VM, device-assign the SMBus i2cs into the VM and see if the driver signaling can be intercepted?
