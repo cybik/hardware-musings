@@ -21,3 +21,13 @@
     * Further further proof of this: with additional package pulls in my "bootstrap script", Pipewire worked fine
 * Trackpad is fine
 * OpenRGB has no idea about anything here.
+
+# Current things I want to do
+
+* Reach out to Eluktronics about how to poke the right things to get LED control
+    * Hi Bob, if you're reading this, the only way I'm seeing to poke the LEDs right now is two SMBus devices (this thing: https://www.i2c-bus.org/smbus/), but as I don't know how to poke them (and am steadfast in my refusal to run Windows, damn it!), I may need some wee help if you happen to have any information.
+    * Devices: 
+      ```
+      i2c-1   smbus           SMBus PIIX4 adapter port 0 at ff00      SMBus adapter
+      i2c-2   smbus           SMBus PIIX4 adapter port 2 at ff00      SMBus adapter
+      ```
