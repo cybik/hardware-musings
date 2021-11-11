@@ -1,10 +1,15 @@
-# Personal notes on running Linux on the Eluktronics Prometheus XVI
+# Running Linux on the Eluktronics Prometheus XVI
+
+This is my personal notes about bringing up Linux on an Eluktronics Prometheus XVI laptop.
 
 ## Table of Contents
 * [Prep work](#prep-work)
 * [Observed behaviours](#observed-behaviours)
 * [Observed Nits](#observed-nits)
 * [Things I want to do](#things-i-want-to-do)
+   * [Getting LEDs working](#getting-leds-working)
+* [Misc](#misc)
+   * [Hardware Info](#hardware-info)
 
 ## Prep work
 
@@ -26,7 +31,9 @@
     * Further proof of this: a full "reinstall" (made to optimize partition setup and data arrangement, because I'm dumb) had sound working before shenanigans with audio
     * Further further proof of this: with additional package pulls in my "bootstrap script", Pipewire worked fine
 * Trackpad is fine
+* Bluetooth just works, I paired a Dualshock 4 without effort and could play Hades with it.
 * OpenRGB has no idea about anything here.
+* VRR is crap on Linux, panel refresh rate is being a butt made of butt butts.
 
 ## Observed Nits
 
@@ -44,7 +51,8 @@
 
 ## Things I want to do
 
-* Reach out to Eluktronics about how to poke the right things to get LED control
+### Getting LEDs working
+* Need to reach out to Eluktronics about how to poke the right things to get LED control
     * Hi Bob, if you're reading this, the only way I'm seeing to poke the LEDs right now is two SMBus devices (this thing: https://www.i2c-bus.org/smbus/), but as I don't know how to poke them (and am steadfast in my refusal to run Windows, damn it!), I may need some wee help if you happen to have any information.
     * Devices: 
       ```
@@ -52,3 +60,68 @@
       i2c-2   smbus           SMBus PIIX4 adapter port 2 at ff00      SMBus adapter
       ```
 * Barring that, give up, install dumb windows in a VM, device-assign the SMBus i2cs into the VM and see if the driver signaling can be intercepted?
+
+## Misc
+
+### Hardware Info
+
+#### lspci
+```
+00:00.0 Host bridge: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne Root Complex
+00:00.2 IOMMU: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne IOMMU
+00:01.0 Host bridge: Advanced Micro Devices, Inc. [AMD] Renoir PCIe Dummy Host Bridge
+00:01.1 PCI bridge: Advanced Micro Devices, Inc. [AMD] Renoir PCIe GPP Bridge
+00:02.0 Host bridge: Advanced Micro Devices, Inc. [AMD] Renoir PCIe Dummy Host Bridge
+00:02.1 PCI bridge: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne PCIe GPP Bridge
+00:02.2 PCI bridge: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne PCIe GPP Bridge
+00:02.3 PCI bridge: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne PCIe GPP Bridge
+00:02.4 PCI bridge: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne PCIe GPP Bridge
+00:08.0 Host bridge: Advanced Micro Devices, Inc. [AMD] Renoir PCIe Dummy Host Bridge
+00:08.1 PCI bridge: Advanced Micro Devices, Inc. [AMD] Renoir Internal PCIe GPP Bridge to Bus
+00:14.0 SMBus: Advanced Micro Devices, Inc. [AMD] FCH SMBus Controller (rev 51)
+00:14.3 ISA bridge: Advanced Micro Devices, Inc. [AMD] FCH LPC Bridge (rev 51)
+00:18.0 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 166a
+00:18.1 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 166b
+00:18.2 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 166c
+00:18.3 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 166d
+00:18.4 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 166e
+00:18.5 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 166f
+00:18.6 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 1670
+00:18.7 Host bridge: Advanced Micro Devices, Inc. [AMD] Device 1671
+01:00.0 VGA compatible controller: NVIDIA Corporation GA104M [GeForce RTX 3080 Mobile / Max-Q 8GB/16GB] (rev a1)
+01:00.1 Audio device: NVIDIA Corporation GA104 High Definition Audio Controller (rev a1)
+02:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8125 2.5GbE Controller (rev 05)
+03:00.0 Network controller: Intel Corporation Wi-Fi 6 AX200 (rev 1a)
+04:00.0 Non-Volatile memory controller: Intel Corporation SSD 660P Series (rev 03)
+05:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981/PM981/PM983
+06:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Cezanne (rev c4)
+06:00.1 Audio device: Advanced Micro Devices, Inc. [AMD/ATI] Renoir Radeon High Definition Audio Controller
+06:00.2 Encryption controller: Advanced Micro Devices, Inc. [AMD] Family 17h (Models 10h-1fh) Platform Security Processor
+06:00.3 USB controller: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne USB 3.1
+06:00.4 USB controller: Advanced Micro Devices, Inc. [AMD] Renoir/Cezanne USB 3.1
+06:00.5 Multimedia controller: Advanced Micro Devices, Inc. [AMD] Raven/Raven2/FireFlight/Renoir Audio Processor (rev 01)
+06:00.6 Audio device: Advanced Micro Devices, Inc. [AMD] Family 17h (Models 10h-1fh) HD Audio Controller
+```
+
+#### lsusb
+
+```
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 002: ID 0408:2094 Quanta Computer, Inc. USB webcam
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 002: ID 8087:0029 Intel Corp. AX200 Bluetooth
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+```
+
+#### lspcmcia
+
+Nothing. This is 2021 you numpties.
+
+#### Interesting bits
+
+* This is pretty much a Quanta Computer design. Nothing bad about it, just good to know where it comes from.
+* Eluktronics did populate the Serial Number fields with the right values!
+* The "version" stuffs say Type1Version and Type2Version, wonder what's up with that
+* The BIOS software is recent as hell.
+* Variable Refresh Rate on the panel is weird and I'm "locked" to 60hz somehow. Not Eluktronics' fault.
